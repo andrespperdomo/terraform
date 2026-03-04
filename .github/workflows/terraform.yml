@@ -42,4 +42,9 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve 
+        run: terraform apply -auto-approve
+       
+       - name: Check AWS env
+         run: |
+           echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID"
+           echo "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:0:4}******** 
