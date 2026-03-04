@@ -22,8 +22,8 @@ jobs:
       AWS_ACCESS_KEY_ID: test
       AWS_SECRET_ACCESS_KEY: test
       AWS_DEFAULT_REGION: us-east-1
-      TF_VAR_table_name: ${{ secrets.TF_VAR_table_name }}
-      TF_VAR_hash_key: ${{ secrets.TF_VAR_hash_key }}
+      TF_VAR_table_name: ${{secrets.TF_VAR_table_name}}
+      TF_VAR_hash_key: ${{secrets.TF_VAR_hash_key}}
 
     steps:
       - uses: actions/checkout@v4
@@ -35,6 +35,11 @@ jobs:
           wget https://releases.hashicorp.com/terraform/1.6.6/terraform_1.6.6_linux_amd64.zip
           unzip terraform_1.6.6_linux_amd64.zip
           sudo mv terraform /usr/local/bin/
+
+      - name: Debug Variables
+        run: |
+          echo "Table name length:=============== ${#TF_VAR_table_name}"
+          echo "Hash key length:================== ${#TF_VAR_hash_key}"    
 
       - name: Terraform Init
         run: terraform init
